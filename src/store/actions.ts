@@ -1,10 +1,9 @@
-import { getNewHouse } from "@/api/house"
+import { getHello } from "@/api/house"
 import { ActionContext } from "vuex";
 import { stateType } from "./state";
-//ActionContext<rootState,moudleState>
 export default {
   async fetchHouse(ctx:ActionContext<stateType,stateType>):Promise<void>{
-    const list  = await getNewHouse();
+    const list  = await getHello();
     ctx.commit('SAVE_HOUSELIST',list)
   },
 }

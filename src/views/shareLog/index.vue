@@ -8,13 +8,12 @@
 import * as echarts from "echarts";
 import { chartOptions, lineChartOptions } from "./chartOptions";
 import { ref, onMounted } from "vue";
-import { getNewHouse,getHello } from "@/api/house";
+import { getHello } from "@/api/house";
 export default {
   setup() {
     const myRef = ref(null);
     const lineChartRef = ref(null);
     const initT = async () => {
-      // const res = await getNewHouse();
       await getHello();
       const chartDom = document.getElementById("mycharts");
       if (chartDom) {

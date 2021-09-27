@@ -1,29 +1,47 @@
-import { createRouter, createWebHashHistory, RouteRecordRaw,RouteComponent } from 'vue-router';
-//静态路由
-import homeRouter from './modules/home';
-import remainingRouter from './modules/remaining';
-
-
-const constantRoutes: Array<RouteComponent> = [
-  homeRouter,
-  remainingRouter
+import { createRouter, createWebHashHistory, RouteRecordRaw } from "vue-router";
+const routes: Array<RouteRecordRaw> = [
+  {
+    path: '/',
+    redirect: '/home'
+  },
+  {
+    path: "/home",
+    name: "home",
+    meta: {
+      title: "首页",
+      keepAlive: true
+    },
+    component: () => import('@/views/home/index.vue'),
+  },
+  {
+    path: '/house',
+    name: 'house',
+    meta: {
+      title: "新房列表",
+      keepAlive: true,
+    },
+    component: () => import('@/views/house/index.vue'),
+  },
+  {
+    path: "/login",
+    name: "login",
+    meta: {
+      title: "登录",
+      keepAlive: true
+    },
+    component: () => import('@/views/login/index.vue'),
+  },  {
+    path: "/about",
+    name: "about",
+    meta: {
+      title: "关于我们",
+      keepAlive: true
+    },
+    component: () => import('@/views/about/index.vue'),
+  },
 ];
-
-//按照路由meta的rank进行排序路由
-const ascending = (arr: any[]) =>{
-  return arr.sort((a,b)=>{
-    return a?.meta?.rank - b?.meta.rank;
-  });
-}
-
 const router = createRouter({
   history: createWebHashHistory(),
-  routes:ascending(constantRoutes)
+  routes
 });
-
-router.beforeEach((to,from,next)=>{
-  console.log(to,from,next);
-  next();
-})
-
 export default router;
